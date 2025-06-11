@@ -1,4 +1,4 @@
-# flake8: noqa
+
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -20,8 +20,7 @@ from .forms import (
 from .services import get_attempt_from_cache, get_mailing_from_cache
 
 
-# def home(request):
-#     return render(request, 'home.html')
+
 
 
 def base(request):
@@ -29,8 +28,8 @@ def base(request):
     return render(request, "base.html")
 
 
-# Главная страница
-class homeView(TemplateView):
+class HomeView(TemplateView):
+    """Главная страница"""
     template_name = "mailing/home.html"
 
     def get_context_data(self, **kwargs):
@@ -44,8 +43,8 @@ class homeView(TemplateView):
         return context_data
 
 
-# Шаблон контакты
 class Contacts(TemplateView):
+    """Шаблон контакты"""
 
     template_name = "mailing/contacts.html"
 
@@ -57,13 +56,11 @@ class Contacts(TemplateView):
         return render(request, "mailing/contacts.html")
 
 
-# Страница ответа на отправленное сообщение
 class Messages(TemplateView):
-
+    """Страница на отправление сообщений"""
     template_name = "mailing/message_list.html"
 
 
-# CRUD для рассылок
 class MailingListView(ListView):
     model = Mailing
     template_name = "mailing/mailing_list.html"
@@ -111,8 +108,6 @@ class MailingDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "mailing/mailing_delete.html"
     success_url = reverse_lazy("mailing:mailing_list")
 
-
-# CRUD для получателей
 
 
 class ReceiveMailListView(ListView):

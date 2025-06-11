@@ -34,7 +34,6 @@ from users.forms import (
 )
 from users.models import User
 
-# Create your views here.
 
 
 def user_logout(request):
@@ -43,6 +42,7 @@ def user_logout(request):
 
 
 class UserCreateView(CreateView):
+    """Создание пользовотеля"""
     model = User
     form_class = UserRegisterForm
     success_url = reverse_lazy("users:login")
@@ -107,7 +107,7 @@ class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView
         return context
 
 
-# flake8: noqa
+
 class UserForgotPasswordView(SuccessMessageMixin, PasswordResetView):
     """Представление по сбросу пароля по почте"""
 

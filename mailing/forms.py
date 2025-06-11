@@ -1,4 +1,4 @@
-# flake8: noqa
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import BooleanField, ModelForm
@@ -7,6 +7,7 @@ from .models import AttemptMailing, Mailing, Message, ReceiveMail
 
 
 class StyleFormMixin:
+    """Миксин для стилизации полей формы"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fild_name, fild in self.fields.items():
@@ -17,6 +18,7 @@ class StyleFormMixin:
 
 
 class EmailForm(forms.Form):
+    """Форма для отправки email-сообщений"""
     subject = forms.CharField(max_length=255, label="Тема письма")
     message = forms.CharField(widget=forms.Textarea, label="Сообщение")
     recipients = forms.CharField(
@@ -25,14 +27,14 @@ class EmailForm(forms.Form):
 
 
 class MailingForm(StyleFormMixin, ModelForm):
+    """Форма для создания и редактирования рассылок"""
     class Meta:
         model = Message
         fields = "__all__"
-        # exclude = ("set_is_active", "owner", "first_sending", "end_sending")
 
 
 class MessageForm(StyleFormMixin, ModelForm):
-
+    """Форма для создания и редактирования сообщений"""
     class Meta:
 
         model = Message
@@ -40,7 +42,7 @@ class MessageForm(StyleFormMixin, ModelForm):
 
 
 class ReceiveMailForm(StyleFormMixin, ModelForm):
-
+    """Форма для создания и редактирования полученных писем"""
     class Meta:
 
         model = ReceiveMail
@@ -49,6 +51,7 @@ class ReceiveMailForm(StyleFormMixin, ModelForm):
 
 
 class ReceiveMailModeratorForm(StyleFormMixin, ModelForm):
+    """Форма для модераторов для управления полученными письмами"""
     class Meta:
 
         model = ReceiveMail
@@ -56,6 +59,7 @@ class ReceiveMailModeratorForm(StyleFormMixin, ModelForm):
 
 
 class MailingModeratorForm(StyleFormMixin, ModelForm):
+    """Форма для модераторов для управления рассылками"""
     class Meta:
         model = Mailing
         fields = "__all__"

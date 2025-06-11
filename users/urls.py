@@ -16,7 +16,7 @@ from users.views import (
     user_logout,
 )
 
-# flake8: noqa
+
 app_name = UsersConfig.name
 
 urlpatterns = [
@@ -34,5 +34,5 @@ urlpatterns = [
     path(
         "password-recovery/", PasswordRecoveryView.as_view(), name="password_recovery"
     ),
-    # path("attempt/", cache_page(60)(MailingAttemptListView.as_view()), name="attempt"),
+
 ]

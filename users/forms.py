@@ -1,4 +1,3 @@
-# flake8: noqa
 from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
@@ -12,6 +11,7 @@ from users.models import User
 
 
 class UserRegisterForm(StyleFormMixin, UserCreationForm):
+    """Форма пользователя"""
     class Meta:
         model = User
         fields = ("email", "password1", "password2")
